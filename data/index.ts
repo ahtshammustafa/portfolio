@@ -2,8 +2,10 @@ import { img, sub, video } from "framer-motion/client";
 
 export const navItems = [
   { name: "About", link: "#about" },
-  { name: "Education", link: "#education" },
   { name: "Experience", link: "#experience" },
+  { name: "Skills", link: "#skills" },
+  { name: "Locations", link: "#locations" },
+  { name: "Education", link: "#education" },
   { name: "Projects", link: "#projects" },
   { name: "Contact", link: "#contact" },
   { name: "Resume", link: "/UpdatedResume_AhtshamM.pdf", download: true, target: "_blank" },
@@ -44,7 +46,7 @@ export const navItems = [
     },
     {
       id: 4,
-      title: "Spatial Data Science and GIS Development",
+      title: "Earth Science, Remote Sensing and GIS Development",
       description: "",
       className: "lg:col-span-2 md:col-span-3 md:row-span-1",
       imgClassName: "",
@@ -166,32 +168,32 @@ export const navItems = [
   export const companies = [
     {
       id: 1,
-      name: "ArcGIS suite",
+      name: "QGIS",
       img: "/qgis.png",
       nameImg: "/qgis.svg",
-   
+
     },
     {
       id: 2,
-      name: "appwrite",
+      name: "ENVI",
       img: "/envi.png",
       nameImg: "/envi.svg",
     },
     {
       id: 3,
-      name: "HOSTINGER",
+      name: "Google Earth Engine",
       img: "/gee.png",
       nameImg: "/gee.svg",
     },
     {
       id: 4,
-      name: "stream",
+      name: "OpenLayers",
       img: "/ol.png",
       nameImg: "/ol.svg",
     },
     {
       id: 5,
-      name: "docker.",
+      name: "ArcGIS Pro",
       img: "/ArcGIS-Pro.png",
       nameImg: "/arcgispro.svg",
     },
@@ -221,7 +223,7 @@ export const navItems = [
     },
     {
       id: 10,
-      name: "docker.",
+      name: "Leaflet",
       img: "/l.png",
       nameImg: "/leaflet.svg",
     },
@@ -245,19 +247,19 @@ export const navItems = [
     },
     {
       id: 11,
-      name: "ras",
+      name: "HEC-RAS",
       img: "/ras.png",
       nameImg: "/ras.svg",
     },
     {
-      id: 11,
-      name: "ramms",
+      id: 12,
+      name: "RAMMS",
       img: "/ramms.webp",
       nameImg: "/ramms.svg",
     },
     {
-      id: 11,
-      name: "cs",
+      id: 13,
+      name: "C#",
       img: "/cs.png",
       nameImg: "/cs.svg",
     },
@@ -284,57 +286,33 @@ export const navItems = [
   export const workExperience = [
     {
       id: 1,
-      title: "Research Officer",
-      subtitle: "(Government of Pakistan - Ministry of Defence)",
-      desc: "Lead in the development of data visualization and spatial data analysis applications using ArcGIS JS API, ASP.NET, PostgreSQL, ArcGIS Server, Openlayers and Leaflet.",
+      title: "Assistant Director",
+      subtitle: "(Government of Pakistan · Jan 2024 - Present)",
+      desc: "Rawalpindi · On-site. GIS Development and Remote Sensing.",
       className: "md:col-span-2",
       thumbnail: "/gop.png",
     },
     {
       id: 2,
-      title: "GIS Officer",
-      subtitle: "(Army Land Management Cell - Ministry of Defence)",
-      desc: "Contributed in the Development of Pakistan Army Land Information and Management Sytem using leaflet, geoserver and PostgreSQL",
-      className: "md:col-span-2", // change to md:col-span-2
-      thumbnail: "/gop.png",
-    },
-    {
-      id: 3,
-      title: "Research Associate",
-      subtitle: "(National University of Sciences and Technology)",
-      desc: "Spatial Data Analysis using different datasets, Numerical Modelling and Simulations, Reporting and Documentation",
-      className: "md:col-span-2", // change to md:col-span-2
+      title: "Research Assistant",
+      subtitle: "(National University of Sciences and Technology (NUST) · Jan 2023 - Dec 2023)",
+      desc: "Islamabad, Pakistan · Hybrid. Python (Programming Language), GIS Analysis.",
+      className: "md:col-span-2",
       thumbnail: "/nust.png",
     },
     {
       id: 3,
-      title: "Assistant Manager GIS",
-      subtitle: "(Defense Housing Authority)",
-      desc: "Cadastral Mapping, Surveying, Led in the Development of Land Information and Management Systems, Reporting and Documentation",
-      className: "md:col-span-2", // change to md:col-span-2
-      thumbnail: "/DHA.png",
-    },
-    {
-      id: 4,
-      title: "Senior GIS Analyst",
-      subtitle: "(Chinar Mines and Minerals)", 
-      desc: "Digital Image Processing, Land Use and Land Cover Mapping, Watersheds, Runoff Estimation, and Mineral Mapping using Hyperspectral (Hype‑rion) Imagery, and Drone Imagery Processing",
+      title: "Junior Geologist | Remote Sensing Analyst",
+      subtitle: "(Chinar Mineral Processing Mills · Apr 2020 - May 2022)",
+      desc: "Pakistan · On-site. Economic Geology | Mineral Exploration | Hyperspectral Remote Sensing | Geochemistry | Petrology.",
       className: "md:col-span-2",
       thumbnail: "/chinar.png",
     },
     {
-      id: 3,
-      title: "Management Trainee Officer",
-      subtitle: "(Frontier Works Organization)",
-      desc: "Mineral Exploration, Geological Mapping, and Geophysical Surveys",
-      className: "md:col-span-2", // change to md:col-span-2
-      thumbnail: "/fwo.png",
-    },
-    {
       id: 4,
       title: "Intern",
-      subtitle: "(Pakistan Council of Research in Water Resources)",
-      desc: "Water Quality Analysis, Soil Sampling, and Analysis and Geological Mapping",
+      subtitle: "(PCRWR · Dec 2020 - Feb 2021)",
+      desc: "Muzaffarabad, Azad Kashmir, Pakistan · On-site. Geographic Information Systems (GIS) and Geophysics.",
       className: "md:col-span-2",
       thumbnail: "/pcrwr.png",
     },
