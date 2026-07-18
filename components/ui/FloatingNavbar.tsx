@@ -17,6 +17,8 @@ export const FloatingNav = ({
     name: string;
     link: string;
     icon?: JSX.Element;
+    download?: boolean;
+    target?: string;
   }[];
   className?: string;
 }) => {
@@ -103,6 +105,9 @@ export const FloatingNav = ({
             <Link
               key={`link=${idx}`}
               href={navItem.link}
+              target={navItem.target}
+              download={navItem.download}
+              rel={navItem.target === "_blank" ? "noopener noreferrer" : undefined}
               className={cn(
                 "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
               )}

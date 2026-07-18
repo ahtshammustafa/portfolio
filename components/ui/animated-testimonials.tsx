@@ -10,6 +10,7 @@ type Testimonial = {
   name: string;
   designation: string;
   src: string;
+  link?: string;
 };
 export const AnimatedTestimonials = ({
                                        testimonials,
@@ -79,14 +80,40 @@ export const AnimatedTestimonials = ({
                         }}
                         className="absolute inset-0 origin-bottom"
                     >
-                      <img
-                          src={testimonial.src}
-                          alt={testimonial.name}
-                          width={500}
-                          height={500}
-                          draggable={false}
-                          className="h-full w-full rounded-3xl object-cover object-center"
-                      />
+                      {testimonial.link ? (
+                        <a
+                          href={testimonial.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            window.open(
+                              testimonial.link,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }}
+                          className="block h-full w-full"
+                        >
+                          <img
+                              src={testimonial.src}
+                              alt={testimonial.name}
+                              width={500}
+                              height={500}
+                              draggable={false}
+                              className="h-full w-full rounded-3xl object-cover object-center cursor-pointer"
+                          />
+                        </a>
+                      ) : (
+                        <img
+                            src={testimonial.src}
+                            alt={testimonial.name}
+                            width={500}
+                            height={500}
+                            draggable={false}
+                            className="h-full w-full rounded-3xl object-cover object-center"
+                        />
+                      )}
                     </motion.div>
                 ))}
               </AnimatePresence>

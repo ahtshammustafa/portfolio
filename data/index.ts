@@ -8,8 +8,8 @@ export const navItems = [
   { name: "Education", link: "#education" },
   { name: "Projects", link: "#projects" },
   { name: "Contact", link: "#contact" },
-  { name: "Resume", link: "/UpdatedResume_AhtshamM.pdf", download: true, target: "_blank" },
-  { name: "Certifications", link: "/Ahtsham_Certifications.pdf", download: true, target: "_blank" },
+  { name: "Resume", link: "/UpdatedResume_AhtshamM.pdf", target: "_blank" },
+  { name: "Certifications", link: "/Ahtsham_Certifications.pdf", target: "_blank" },
   { name: "Refrees", link: "#testimonials" },
 ];
   

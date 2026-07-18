@@ -8,12 +8,14 @@ export function AnimatedTestimonialsDemo() {
             name: "Dr Javed Iqbal",
             designation: "Professor at IGIS NUST",
             src: "/drjaved.png",
+            link: "https://igis.nust.edu.pk/faculty/javed-iqbal-1/",
         },
         {
             quote: "Teaching Ahtsham in Natural Hazards and Disaster Management was rewarding, as his strong analytical skills, curiosity, and expertise in geology, GIS, and remote sensing enabled him to excel in hazard assessment and risk management, making him a strong candidate for roles in resilience planning and disaster mitigation.",
             name: "Dr Salman Atif",
             designation: "Associate Professor at IGIS NUST",
             src: "/drSalman.png",
+            link: "https://igis.nust.edu.pk/faculty/salman-atif/",
         },
         {
             quote:
@@ -21,6 +23,7 @@ export function AnimatedTestimonialsDemo() {
             name: "Dr Ejaz Hussain",
             designation: "Associate Dean (Professor) at IGIS NUST",
             src: "drejaz.png",
+            link: "https://igis.nust.edu.pk/faculty/ejaz-hussain-1/",
         },
         {
             quote:
@@ -28,6 +31,7 @@ export function AnimatedTestimonialsDemo() {
             name: "Dr Ali Tahir",
             designation: "Associate Professor at IGIS NUST",
             src: "drali.png",
+            link: "https://igis.nust.edu.pk/faculty/muhammad-ali-tahir-1/",
         },
         {
             quote:
@@ -35,6 +39,7 @@ export function AnimatedTestimonialsDemo() {
             name: "Syed Nohman Gilani",
             designation: "Chief Geologist at Chinar Group of Companies",
             src: "nom.png",
+            link: "https://www.linkedin.com/in/syed-nohman-gilani-260b20246/",
         },
     ];
     return <AnimatedTestimonials testimonials={testimonials} />;
