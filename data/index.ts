@@ -421,7 +421,7 @@ export const navItems = [
     {
       id: 3,
       img: "/link.svg",
-      link: "https://www.linkedin.com/in/ahtshammustafaawan/",
+      link: "https://www.linkedin.com/in/aawan1/",
     },
     {
       id: 3,
