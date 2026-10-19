@@ -112,17 +112,17 @@ export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-3xl mx-auto w-full flex flex-col gap-4">
+      <ul className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
             key={`card-${card.title}-${id}`}
             onClick={() => setActive(card)}
-            className="cursor-pointer"
+            className="cursor-pointer h-full"
           >
-            <CardSpotlight className="p-4 flex flex-col md:flex-row justify-between items-center border border-white/[0.1] hover:border-white/[0.3] rounded-xl">
-              <div className="flex gap-4 flex-col md:flex-row items-center md:items-start w-full relative z-20">
-                <motion.div layoutId={`image-${card.title}-${id}`}>
+            <CardSpotlight className="h-full p-5 flex flex-col justify-between gap-5 border border-white/[0.1] hover:border-white/[0.3] rounded-xl">
+              <div className="flex gap-4 items-start w-full relative z-20">
+                <motion.div layoutId={`image-${card.title}-${id}`} className="shrink-0">
                   <img
                     width={100}
                     height={100}
@@ -131,16 +131,16 @@ export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
                     className="h-16 w-16 rounded-lg object-contain bg-white p-2"
                   />
                 </motion.div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <motion.h3
                     layoutId={`title-${card.title}-${id}`}
-                    className="font-semibold text-white text-center md:text-left"
+                    className="font-semibold text-white"
                   >
                     {card.title}
                   </motion.h3>
                   <motion.p
                     layoutId={`description-${card.subtitle}-${id}`}
-                    className="text-white-200 text-sm text-center md:text-left"
+                    className="text-white-200 text-sm mt-1"
                   >
                     {card.subtitle}
                   </motion.p>
@@ -148,7 +148,7 @@ export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
               </div>
               <motion.button
                 layoutId={`button-${card.title}-${id}`}
-                className="px-4 py-2 text-sm rounded-full font-bold bg-white/[0.05] hover:bg-purple hover:text-white text-white mt-4 md:mt-0 whitespace-nowrap relative z-20"
+                className="self-end px-4 py-2 text-sm rounded-full font-bold bg-white/[0.05] hover:bg-purple hover:text-white text-white whitespace-nowrap relative z-20"
               >
                 View details
               </motion.button>
