@@ -8,11 +8,19 @@ import { CardSpotlight } from "./card-spotlight";
 export interface ExpandableCardItem {
   title: string;
   subtitle: string;
-  desc: string;
+  desc?: string;
   thumbnail: string;
+  icons?: string[];
+  link?: string;
 }
 
-export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
+export function ExpandableCard({
+  cards,
+  coverThumbnails = false,
+}: {
+  cards: ExpandableCardItem[];
+  coverThumbnails?: boolean;
+}) {
   const [active, setActive] = useState<ExpandableCardItem | boolean | null>(
     null
   );
@@ -75,7 +83,11 @@ export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
                   height={200}
                   src={active.thumbnail}
                   alt={active.title}
-                  className="w-full h-40 sm:rounded-tr-lg sm:rounded-tl-lg object-contain bg-white p-6"
+                  className={`w-full sm:rounded-tr-lg sm:rounded-tl-lg ${
+                    coverThumbnails
+                      ? "h-60 object-cover"
+                      : "h-40 object-contain bg-white p-6"
+                  }`}
                 />
               </motion.div>
 
@@ -104,7 +116,29 @@ export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
                     exit={{ opacity: 0 }}
                     className="text-white-200 text-sm md:text-base flex flex-col items-start gap-4"
                   >
-                    <p>{active.desc}</p>
+                    {active.desc && <p>{active.desc}</p>}
+                    {active.icons && active.icons.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        {active.icons.map((icon) => (
+                          <div
+                            key={icon}
+                            className="border border-white/[.2] rounded-full bg-black w-10 h-10 flex justify-center items-center"
+                          >
+                            <img src={icon} alt="tool" className="p-2" />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {active.link && (
+                      <a
+                        href={active.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 text-sm rounded-full font-bold bg-purple text-white"
+                      >
+                        Go to the project
+                      </a>
+                    )}
                   </motion.div>
                 </div>
               </div>
@@ -128,7 +162,11 @@ export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
                     height={100}
                     src={card.thumbnail}
                     alt={card.title}
-                    className="h-16 w-16 rounded-lg object-contain bg-white p-2"
+                    className={`h-16 w-16 rounded-lg ${
+                      coverThumbnails
+                        ? "object-cover"
+                        : "object-contain bg-white p-2"
+                    }`}
                   />
                 </motion.div>
                 <div className="flex-1 min-w-0">
@@ -140,7 +178,7 @@ export function ExpandableCard({ cards }: { cards: ExpandableCardItem[] }) {
                   </motion.h3>
                   <motion.p
                     layoutId={`description-${card.subtitle}-${id}`}
-                    className="text-white-200 text-sm mt-1"
+                    className="text-white-200 text-sm mt-1 line-clamp-3"
                   >
                     {card.subtitle}
                   </motion.p>
