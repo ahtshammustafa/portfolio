@@ -1,25 +1,28 @@
 "use client";
 
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import { IconArrowLeft, IconArrowRight, IconExternalLink, IconQuote } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
-
 import { useEffect, useState } from "react";
 
-type Testimonial = {
+export type Testimonial = {
   quote: string;
   name: string;
   designation: string;
+  institution?: string;
+  relationship?: string;
   src: string;
   link?: string;
 };
+
 export const AnimatedTestimonials = ({
-                                       testimonials,
-                                       autoplay = false,
-                                     }: {
+  testimonials,
+  autoplay = false,
+}: {
   testimonials: Testimonial[];
   autoplay?: boolean;
 }) => {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
@@ -29,164 +32,175 @@ export const AnimatedTestimonials = ({
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const isActive = (index: number) => {
-    return index === active;
-  };
-
   useEffect(() => {
-    if (autoplay) {
-      const interval = setInterval(handleNext, 5000);
+    if (autoplay && !paused) {
+      const interval = setInterval(() => {
+        setActive((prev) => (prev + 1) % testimonials.length);
+      }, 7000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, paused, testimonials.length]);
 
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
-  };
+  const current = testimonials[active];
+
   return (
-      <div id="testimonials" className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
-        <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
-          <div>
-            <div className="relative h-80 w-full">
-              <AnimatePresence>
-                {testimonials.map((testimonial, index) => (
-                    <motion.div
-                        key={testimonial.src}
-                        initial={{
-                          opacity: 0,
-                          scale: 0.9,
-                          z: -100,
-                          rotate: randomRotateY(),
-                        }}
-                        animate={{
-                          opacity: isActive(index) ? 1 : 0.7,
-                          scale: isActive(index) ? 1 : 0.95,
-                          z: isActive(index) ? 0 : -100,
-                          rotate: isActive(index) ? 0 : randomRotateY(),
-                          zIndex: isActive(index)
-                              ? 40
-                              : testimonials.length + 2 - index,
-                          y: isActive(index) ? [0, -80, 0] : 0,
-                        }}
-                        exit={{
-                          opacity: 0,
-                          scale: 0.9,
-                          z: 100,
-                          rotate: randomRotateY(),
-                        }}
-                        transition={{
-                          duration: 0.4,
-                          ease: "easeInOut",
-                        }}
-                        className="absolute inset-0 origin-bottom"
-                    >
-                      {testimonial.link ? (
-                        <a
-                          href={testimonial.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            window.open(
-                              testimonial.link,
-                              "_blank",
-                              "noopener,noreferrer"
-                            );
-                          }}
-                          className="block h-full w-full"
-                        >
-                          <img
-                              src={testimonial.src}
-                              alt={testimonial.name}
-                              width={500}
-                              height={500}
-                              draggable={false}
-                              className="h-full w-full rounded-3xl object-cover object-center cursor-pointer"
-                          />
-                        </a>
-                      ) : (
-                        <img
-                            src={testimonial.src}
-                            alt={testimonial.name}
-                            width={500}
-                            height={500}
-                            draggable={false}
-                            className="h-full w-full rounded-3xl object-cover object-center"
-                        />
-                      )}
-                    </motion.div>
-                ))}
+    <div
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      className="mx-auto max-w-5xl px-4 py-10 font-sans antialiased"
+    >
+      {/* Interactive Referee Selector Pills */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8">
+        {testimonials.map((item, idx) => {
+          const isSelected = idx === active;
+          return (
+            <button
+              key={item.name}
+              type="button"
+              onClick={() => setActive(idx)}
+              className={`flex items-center gap-2.5 px-3.5 py-2 rounded-full border text-left transition-all ${
+                isSelected
+                  ? "bg-purple/20 border-purple text-white shadow-lg shadow-purple/20"
+                  : "bg-black-200/70 border-white/[0.1] text-white-200 hover:border-white/[0.3] hover:text-white"
+              }`}
+            >
+              <img
+                src={item.src}
+                alt={item.name}
+                className="w-7 h-7 rounded-full object-cover border border-white/20 shrink-0"
+              />
+              <div className="leading-tight pr-1">
+                <p className="text-xs font-semibold">{item.name}</p>
+                {item.institution && (
+                  <p className="text-[10px] text-white-100/70">
+                    {item.institution}
+                  </p>
+                )}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Main Spotlight Card */}
+      <div
+        className="relative rounded-3xl border border-white/[0.12] p-6 sm:p-8 lg:p-10 shadow-2xl overflow-hidden"
+        style={{
+          background: "rgb(4,7,29)",
+          backgroundColor:
+            "linear-gradient(135deg, rgba(4,7,29,0.98) 0%, rgba(15,18,46,0.95) 100%)",
+        }}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          {/* Left Column: Referee Portrait & Credentials */}
+          <div className="md:col-span-4 flex flex-col items-center text-center">
+            <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-2xl overflow-hidden border-2 border-purple/40 shadow-xl bg-black-200">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={current.src}
+                  src={current.src}
+                  alt={current.name}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-full h-full object-cover object-top"
+                />
               </AnimatePresence>
             </div>
-          </div>
-          <div className="flex flex-col justify-between py-4">
-            <motion.div
-                key={active}
-                initial={{
-                  y: 20,
-                  opacity: 0,
-                }}
-                animate={{
-                  y: 0,
-                  opacity: 1,
-                }}
-                exit={{
-                  y: -20,
-                  opacity: 0,
-                }}
-                transition={{
-                  duration: 0.2,
-                  ease: "easeInOut",
-                }}
-            >
-              <h3 className="text-2xl font-bold text-black dark:text-white">
-                {testimonials[active].name}
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-neutral-500">
-                {testimonials[active].designation}
+
+            {current.relationship && (
+              <span className="mt-4 inline-block text-xs font-semibold px-3 py-1 rounded-full bg-purple/20 text-purple border border-purple/30">
+                {current.relationship}
+              </span>
+            )}
+
+            <h3 className="mt-2.5 text-xl font-bold text-white">
+              {current.name}
+            </h3>
+            <p className="text-xs sm:text-sm text-white-200 font-medium mt-0.5">
+              {current.designation}
+            </p>
+            {current.institution && (
+              <p className="text-xs text-purple font-medium mt-0.5">
+                {current.institution}
               </p>
-              <motion.p className="mt-8 text-lg text-gray-500 dark:text-neutral-300">
-                {testimonials[active].quote.split(" ").map((word, index) => (
-                    <motion.span
-                        key={index}
-                        initial={{
-                          filter: "blur(10px)",
-                          opacity: 0,
-                          y: 5,
-                        }}
-                        animate={{
-                          filter: "blur(0px)",
-                          opacity: 1,
-                          y: 0,
-                        }}
-                        transition={{
-                          duration: 0.2,
-                          ease: "easeInOut",
-                          delay: 0.02 * index,
-                        }}
-                        className="inline-block"
-                    >
-                      {word}&nbsp;
-                    </motion.span>
+            )}
+
+            {current.link && (
+              <a
+                href={current.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/[0.07] hover:bg-purple text-white hover:text-slate-950 border border-white/[0.12] transition-colors"
+              >
+                <span>Official Profile</span>
+                <IconExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
+          </div>
+
+          {/* Right Column: Recommendation Quote & Controls */}
+          <div className="md:col-span-8 flex flex-col justify-between h-full">
+            <div className="relative">
+              <IconQuote className="w-10 h-10 text-purple/30 mb-3" />
+              <AnimatePresence mode="wait">
+                <motion.blockquote
+                  key={active}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="text-base sm:text-lg lg:text-xl text-white-100 leading-relaxed italic"
+                >
+                  &ldquo;{current.quote}&rdquo;
+                </motion.blockquote>
+              </AnimatePresence>
+            </div>
+
+            {/* Bottom Navigation Bar */}
+            <div className="flex items-center justify-between pt-8 mt-6 border-t border-white/[0.08]">
+              <div className="flex items-center gap-2">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    aria-label={`Select referee ${idx + 1}`}
+                    onClick={() => setActive(idx)}
+                    className={`h-2 rounded-full transition-all ${
+                      idx === active
+                        ? "w-7 bg-purple"
+                        : "w-2 bg-white/25 hover:bg-white/50"
+                    }`}
+                  />
                 ))}
-              </motion.p>
-            </motion.div>
-            <div className="flex gap-4 pt-12 md:pt-0">
-              <button
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-white-200 font-mono mr-1">
+                  {active + 1} / {testimonials.length}
+                </span>
+                <button
+                  type="button"
+                  aria-label="Previous referee"
                   onClick={handlePrev}
-                  className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
-              >
-                <IconArrowLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
-              </button>
-              <button
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.08] hover:bg-purple text-white border border-white/[0.12] transition-colors"
+                >
+                  <IconArrowLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next referee"
                   onClick={handleNext}
-                  className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
-              >
-                <IconArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
-              </button>
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.08] hover:bg-purple text-white border border-white/[0.12] transition-colors"
+                >
+                  <IconArrowRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   );
 };

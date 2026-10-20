@@ -1,14 +1,19 @@
 'use client';
 
+import dynamic from "next/dynamic";
 import { cn } from "@/utils/cn";
 import { BackgroundGradientAnimation } from "./GradientBg";
-import { GlobeDemo } from "./GridGlobe";
-import { div } from "framer-motion/client";
 import { useState } from "react";
-import Lottie from "react-lottie";
 import animationData from "@/data/confetti.json";
 import MagicButton from "./MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
+
+const GlobeDemo = dynamic(() => import("./GridGlobe").then((m) => m.GlobeDemo), {
+    ssr: false,
+});
+const Lottie = dynamic(() => import("react-lottie"), {
+    ssr: false,
+});
 
 export const BentoGrid = ({
     className,
@@ -156,26 +161,30 @@ export const BentoGridItem = ({
 
                     {id === 6 && (
                         <div className="mt-5 relative">
-                            <div className={`absolute -bottom-5 right-0`}>
-                            <Lottie
-                                options={{
-                                    loop: copied,
-                                    autoplay: copied,
-                                    animationData: animationData,
-                                    rendererSettings: {
-                                        preserveAspectRatio: "xMidYMid slice"
-                                    }
-                                }}
-                                height={200}
-                                width={200} />
-                            </div>
-                            <MagicButton 
-                            title={copied ? 'Email Copied' : 'Copy my email'}
-                            icon={<IoCopyOutline />}
-                            position="left"
-                            otherClasses="!bg-[#161a31]"
-                            handleClick={handleCopy}/>
-
+                            {copied && (
+                                <div className="absolute -bottom-5 right-0 pointer-events-none">
+                                    <Lottie
+                                        eventListeners={[]}
+                                        options={{
+                                            loop: copied,
+                                            autoplay: copied,
+                                            animationData: animationData,
+                                            rendererSettings: {
+                                                preserveAspectRatio: "xMidYMid slice",
+                                            },
+                                        }}
+                                        height={200}
+                                        width={200}
+                                    />
+                                </div>
+                            )}
+                            <MagicButton
+                                title={copied ? "Email Copied!" : "Copy my email"}
+                                icon={<IoCopyOutline />}
+                                position="left"
+                                otherClasses="!bg-[#161a31]"
+                                handleClick={handleCopy}
+                            />
                         </div>
                     )}
                 </div>
